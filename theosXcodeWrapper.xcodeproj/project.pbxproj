@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		857E4CEB14545E250070745E /* THEOS */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 857E4CEC14545E250070745E /* Build configuration list for PBXAggregateTarget "THEOS" */;
+			buildPhases = (
+				857E4CEF14545E370070745E /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = THEOS;
+			productName = THEOS;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		857E4CD514545D920070745E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857E4CD414545D920070745E /* UIKit.framework */; };
 		857E4CD714545D920070745E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 857E4CD614545D920070745E /* Foundation.framework */; };
@@ -20,11 +34,11 @@
 		857E4CD414545D920070745E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		857E4CD614545D920070745E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		857E4CD814545D920070745E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		857E4CDC14545D920070745E /* theosXcodeWrapper-Info.plist */ = {isa = PBXFileReference; path = "theosXcodeWrapper-Info.plist"; sourceTree = "<group>"; };
+		857E4CDC14545D920070745E /* theosXcodeWrapper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "theosXcodeWrapper-Info.plist"; sourceTree = "<group>"; };
 		857E4CDE14545D920070745E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		857E4CE014545D920070745E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		857E4CE214545D920070745E /* theosXcodeWrapper-Prefix.pch */ = {isa = PBXFileReference; path = "theosXcodeWrapper-Prefix.pch"; sourceTree = "<group>"; };
-		857E4CE314545D920070745E /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		857E4CE214545D920070745E /* theosXcodeWrapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "theosXcodeWrapper-Prefix.pch"; sourceTree = "<group>"; };
+		857E4CE314545D920070745E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		857E4CE414545D920070745E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +145,7 @@
 			projectRoot = "";
 			targets = (
 				857E4CCF14545D920070745E /* theosXcodeWrapper */,
+				857E4CEB14545E250070745E /* THEOS */,
 			);
 		};
 /* End PBXProject section */
@@ -145,6 +160,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		857E4CEF14545E370070745E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export THEOS=/opt/theos\nexport SDKVERSION=4.3\nexport THEOS_DEVICE_IP=DEVICE_IP_HERE\n\ncd /opt/theos/projects/PROJECT_NAME_HERE\nmake package";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		857E4CCC14545D920070745E /* Sources */ = {
@@ -189,7 +220,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -206,7 +237,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -216,10 +247,21 @@
 		857E4CE914545D920070745E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/,
+					/opt/theos/frameworks/,
+					"\"$(SRCROOT)/../jbapp/theos/frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "theosXcodeWrapper/theosXcodeWrapper-Prefix.pch";
 				INFOPLIST_FILE = "theosXcodeWrapper/theosXcodeWrapper-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../jbapp/theos/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -227,11 +269,36 @@
 		857E4CEA14545D920070745E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/,
+					/opt/theos/frameworks/,
+					"\"$(SRCROOT)/../jbapp/theos/frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "theosXcodeWrapper/theosXcodeWrapper-Prefix.pch";
 				INFOPLIST_FILE = "theosXcodeWrapper/theosXcodeWrapper-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../jbapp/theos/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		857E4CED14545E250070745E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		857E4CEE14545E250070745E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -252,6 +319,14 @@
 			buildConfigurations = (
 				857E4CE914545D920070745E /* Debug */,
 				857E4CEA14545D920070745E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		857E4CEC14545E250070745E /* Build configuration list for PBXAggregateTarget "THEOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				857E4CED14545E250070745E /* Debug */,
+				857E4CEE14545E250070745E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
